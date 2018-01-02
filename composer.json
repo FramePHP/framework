@@ -9,5 +9,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require-dev": {
+        "maximebf/debugbar": "^1.15",
+        "fzaninotto/faker": "^1.7"
+    },
+    "require": {
+        "require propel/propel": "^2.0.0"
+    }
 }
