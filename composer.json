@@ -11,10 +11,13 @@
     ],
     "minimum-stability": "dev",
     "require-dev": {
+        "php": "^7.1",
         "maximebf/debugbar": "^1.15",
         "fzaninotto/faker": "^1.7"
     },
     "require": {
-        "propel/propel": "^2.0"
+        "propel/propel": "^2.0",
+        "altorouter/altorouter": "^1.1",
+        "symfony/http-foundation": "^4.0"
     }
 }
