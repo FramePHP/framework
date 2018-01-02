@@ -9,12 +9,15 @@ use FramePHP\Http\Request;
 * 
 */
 class Application
-{
-	static $Instance = null;
+{	
+	private $Router = Router::class;
+	private $Request  = Request::class;
+	private $Response = Response::class;
+	static $Instance  = null;
 
 	private function __construct()
-	{
-		# code...
+	{	
+		$this->Router = new Router();	
 	}
 
 	public static function Instance()
@@ -23,27 +26,39 @@ class Application
 
 			static::$Instance = new Application();
 		}
-		return static::$Instance;
-		
+		return static::$Instance;		
 	}
 
 	public function getRequest()
 	{
-		$Request = Request::createFromGlobals();
-        dump($Request);
-        return $this;
+		//Get the request from Users
+		$this->Request = Request::createFromGlobals();
+
+		//Redirect request to Router;
+		$this->Router->process($this->Request);
+
+        return static::$Instance;
 	}
 
-	public function setResponse()
+	public function setResponse($type = 'Content')
 	{
-		$Request = Request::createFromGlobals();
-        dump($Request);
-        return $this;
+		$this->Response = new Response(
+			$type,
+			static::HTTP_OK,
+			array('content-type' => 'text/html')
+		);
+        return static::$Instance;
+	}
+
+	public function getResponse()
+	{
+		# code...
 	}
 
 	public function run($stop_time)
 	{
 		$app_time = APP_START_TIME - $stop_time;
-		dump($app_time);
+		dump($app_time, $this, static::$Instance);
+		return static::$Instance;
 	}
 }
