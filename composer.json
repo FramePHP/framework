@@ -15,6 +15,6 @@
         "fzaninotto/faker": "^1.7"
     },
     "require": {
-        "require propel/propel": "^2.0.0"
+        "propel/propel": "^2.0"
     }
 }
