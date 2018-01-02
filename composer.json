@@ -2,6 +2,7 @@
     "name": "frame-php/framework",
     "type": "library",
     "license": "MIT",
+    "description": "Main FramePHP framework and all dependencies",
     "authors": [
         {
             "name": "Hilkiah Makemo",
