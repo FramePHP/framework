@@ -34,14 +34,15 @@ class Application
 	{
 		//Get the request from Users
 		dump($Callback(''));
-		$this->Request = Request::createFromGlobals();		
+		$this->Request = Request::createFromGlobals();	
+		dump($this->Request);	
 
         return static::$Instance;
 	}
 
 	public function getRouting(Closure $Callback = null)
 	{
-		dump($routes = $Callback());
+		$routes = $Callback();
 		$this->Routing->loadRoutes($routes);
 
 		return static::$Instance;

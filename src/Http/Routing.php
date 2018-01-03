@@ -1,6 +1,6 @@
 <?php
 
-namespace FramePHP\App;
+namespace FramePHP\Http;
 
 use PHPRouter\RouteCollection;
 use PHPRouter\Config;
