@@ -1,20 +1,12 @@
 <?php
 
 namespace FramePHP\App;
-
+use PHPRouter\Router as PHPRouter;
 /**
 * 
 */
-class Router extends AltoRouter
+class Router extends PHPRouter
 {
-	// public function __construct( $routes = array(), $basePath = '', $matchTypes = array() ) {
-
-	// 	parent::__construct($routes, $basePath, $matchTypes);
-	// }
-
-	public function process($request)
-	{
-		dump($request);
-	}	
+	
 	
 }

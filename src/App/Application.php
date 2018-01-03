@@ -2,6 +2,7 @@
 
 namespace FramePHP\App;
 
+use Closure;
 use FramePHP\Http\Response;
 use FramePHP\Http\Request;
 
@@ -10,14 +11,14 @@ use FramePHP\Http\Request;
 */
 class Application
 {	
-	private $Router = Router::class;
+	private $Routing  = Routing::class;
 	private $Request  = Request::class;
 	private $Response = Response::class;
-	static $Instance  = null;
+	private static $Instance  = null;
 
 	private function __construct()
 	{	
-		$this->Router = new Router();	
+		$this->Routing = new Routing();
 	}
 
 	public static function Instance()
@@ -29,24 +30,30 @@ class Application
 		return static::$Instance;		
 	}
 
-	public function getRequest()
+	public function getRequest(Closure $Callback = null)
 	{
 		//Get the request from Users
-		$this->Request = Request::createFromGlobals();
-
-		//Redirect request to Router;
-		$this->Router->process($this->Request);
+		dump($Callback(''));
+		$this->Request = Request::createFromGlobals();		
 
         return static::$Instance;
 	}
 
+	public function getRouting(Closure $Callback = null)
+	{
+		dump($routes = $Callback());
+		$this->Routing->loadRoutes($routes);
+
+		return static::$Instance;
+	}
+
 	public function setResponse($type = 'Content')
 	{
-		$this->Response = new Response(
-			$type,
-			static::HTTP_OK,
-			array('content-type' => 'text/html')
-		);
+		// $this->Response = new Response(
+		// 	$type,
+		// 	200,
+		// 	array('content-type' => 'text/html')
+		// );
         return static::$Instance;
 	}
 
@@ -55,10 +62,10 @@ class Application
 		# code...
 	}
 
-	public function run($stop_time)
+	public function run()
 	{
-		$app_time = APP_START_TIME - $stop_time;
-		dump($app_time, $this, static::$Instance);
+		$app_time = APP_START_TIME - microtime(true);
+		dump($app_time, $this);
 		return static::$Instance;
 	}
 }
