@@ -30,22 +30,28 @@ class Application
 		return static::$Instance;		
 	}
 
-	public function getRequest(Closure $Callback = null)
+	public function setRequest(Closure $Callback = null)
 	{
-		//Get the request from Users
-		dump($Callback(''));
-		$this->Request = Request::createFromGlobals();	
-		dump($this->Request);	
+		$this->Request = Request::createFromGlobals();
 
         return static::$Instance;
 	}
 
-	public function getRouting(Closure $Callback = null)
+	public function getRequest()
+	{
+		return $this->Request;
+	}
+
+	public function setRouting(Closure $Callback = null)
 	{
 		$routes = $Callback();
 		$this->Routing->loadRoutes($routes);
-
 		return static::$Instance;
+	}
+
+	public function getRouting()
+	{
+		return $this->Routing;
 	}
 
 	public function setResponse($type = 'Content')
