@@ -5,7 +5,9 @@ namespace FramePHP\App;
 use Closure;
 use FramePHP\Http\Response;
 use FramePHP\Http\Request;
-
+use FramePHP\Http\Routing;
+use FramePHP\Http\Session;
+use FramePHP\Auth\Config;
 /**
 * 
 */
@@ -14,33 +16,39 @@ class Application
 	private $Routing  = Routing::class;
 	private $Request  = Request::class;
 	private $Response = Response::class;
-	private static $Instance  = null;
+	private $Session  = Session::class;
+	private $Config   = Config::class;
+	private $Viewer   = Viewer::class;
+
+	private static $Instance;
 
 	private function __construct()
 	{	
 		$this->Routing = new Routing();
+		$this->Config  = new Config();
 	}
 
 	public static function Instance()
 	{
-		if(static::$Instance == null){
+		if(empty(static::$Instance)){
 
 			static::$Instance = new Application();
 		}
 		return static::$Instance;		
 	}
 
-	public function getRequest(Closure $Callback = null)
+	public function setRequest(Closure $Callback = null)
 	{
-		//Get the request from Users
-		dump($Callback(''));
-		$this->Request = Request::createFromGlobals();	
-		dump($this->Request);	
-
+		$this->Request = Request::createFromGlobals();
         return static::$Instance;
 	}
 
-	public function getRouting(Closure $Callback = null)
+	public function getRequest(Closure $Callback = null)
+	{
+		return $this->Request;
+	}
+
+	public function setRouting(Closure $Callback = null)
 	{
 		$routes = $Callback();
 		$this->Routing->loadRoutes($routes);
@@ -48,24 +56,29 @@ class Application
 		return static::$Instance;
 	}
 
-	public function setResponse($type = 'Content')
+	public function getRouting(Closure $Callback = null)
 	{
-		// $this->Response = new Response(
-		// 	$type,
-		// 	200,
-		// 	array('content-type' => 'text/html')
-		// );
+		return $this->Routing;
+	}
+
+	public function setResponse(Closure $Callback = null)
+	{
+		$type = $Callback();
+		// $this->Response = new Response('hi', 200, [
+		// 	'Content-Type' => 'text/application'
+		// ]);
         return static::$Instance;
 	}
 
 	public function getResponse()
 	{
 		# code...
+		return $this->Response;
 	}
 
 	public function run()
 	{
-		$app_time = APP_START_TIME - microtime(true);
+		$app_time = microtime(true) - APP_START_TIME;
 		dump($app_time, $this);
 		return static::$Instance;
 	}

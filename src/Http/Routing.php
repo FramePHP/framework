@@ -18,7 +18,8 @@ class Routing
 		if(is_array($routes) && count($routes)){
 			$collection = new RouteCollection();
 
-			foreach ($routes as $name => $route) {
+			foreach ($routes['routes'] as $name => $route) {
+				dump($name, $route);
 				$url = '/'.(trim($route['url'] ?? $route[0])).'/';
 				$_controller = $route['_controller'] ?? $route[1];
 				$methods = $route['methods'] ?? $route[2];
