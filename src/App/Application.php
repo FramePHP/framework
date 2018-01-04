@@ -5,19 +5,23 @@ namespace FramePHP\App;
 use Closure;
 use FramePHP\Http\Response;
 use FramePHP\Http\Request;
+use FramePHP\Auth\Configs;
 
 /**
-* 
+*
 */
 class Application
-{	
+{
+	private $Configs  = Config::class;
 	private $Routing  = Routing::class;
 	private $Request  = Request::class;
 	private $Response = Response::class;
+
 	private static $Instance  = null;
 
 	private function __construct()
-	{	
+	{
+		$this->Configs = new Configs();
 		$this->Routing = new Routing();
 	}
 
@@ -27,7 +31,7 @@ class Application
 
 			static::$Instance = new Application();
 		}
-		return static::$Instance;		
+		return static::$Instance;
 	}
 
 	public function setRequest(Closure $Callback = null)
@@ -44,7 +48,7 @@ class Application
 
 	public function setRouting(Closure $Callback = null)
 	{
-		$routes = $Callback();
+		$routes = $Callback($this->Configs->routes);
 		$this->Routing->loadRoutes($routes);
 		return static::$Instance;
 	}
