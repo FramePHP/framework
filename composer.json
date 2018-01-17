@@ -1,0 +1,39 @@
+{
+    "name": "frame-php/framework",
+    "type": "library",
+    "license": "MIT",
+    "description": "Main FramePHP framework and all dependencies",
+    "authors": [
+        {
+            "name": "Hilkiah Makemo",
+            "email": "hilkiah.makemo@skywest.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "php": "^5.5.9",
+        "maximebf/debugbar": "^1.15",
+        "fzaninotto/faker": "^1.7",
+        "merlinthemagic/mts": "dev-master"
+    },
+    "require": {
+        "nikic/php-parser": "^3",
+        "twig/twig": "^2.0",
+        "propel/propel": "^2.0",
+        "symfony/http-foundation": "^4.0",
+        "league/route": "^3.0@dev",
+        "league/container": "^2.4@dev",
+        "zendframework/zend-diactoros": "dev-master"
+    },
+    "autoload": {
+        "files": [
+            "autoload.php"
+        ],
+        "psr-4": {
+            "FramePHP\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/frame"
+    ]
+}
