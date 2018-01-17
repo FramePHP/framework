@@ -19,12 +19,16 @@ class Routing extends RouteCollection
 
 	public function __construct($App, $routes = null)
 	{
-		$this->load($routes)->make();
+		if(!is_array($routes)) $routes = [];
+		foreach ($routes as $route) {
+			$this->load($route)->make();
+		}
 		parent::__construct( $App );
 	}
 
 	public function load($routes_dir)
 	{
+		dump($routes_dir);
 		if(!($RoutesDir = realpath($routes_dir))) return;
 
 		$RoutePaths = glob($RoutesDir.'/*', GLOB_NOSORT);

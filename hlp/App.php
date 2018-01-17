@@ -9,4 +9,10 @@ if(!function_exists('app')){
 		$App = Application::isRunning();
 		return $key != null? $App->get($key): $App;
 	}
+
+	function BP($key = null)
+	{
+		$BP = require APP_ROOT.'blueprint.php';
+		return str_to_arr($BP, $key);
+	}
 }
