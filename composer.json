@@ -19,11 +19,11 @@
     "require": {
         "nikic/php-parser": "^3",
         "twig/twig": "^2.0",
-        "propel/propel": "^2.0",
         "symfony/http-foundation": "^4.0",
         "league/route": "^3.0@dev",
         "league/container": "^2.4@dev",
-        "zendframework/zend-diactoros": "dev-master"
+        "zendframework/zend-diactoros": "dev-master",
+        "gabordemooij/redbean": "dev-master"
     },
     "autoload": {
         "files": [
